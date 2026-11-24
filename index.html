@@ -1,0 +1,869 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jaan Surprise 💗</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Pacifico&display=swap');
+
+:root{
+ --pink:#ff69b4;--purple:#a879ff;--dark:#130b24;
+ --glass:rgba(255,255,255,.085);--line:rgba(255,255,255,.17);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+ font-family:Poppins,sans-serif;color:white;min-height:100vh;
+ background:
+ radial-gradient(ellipse at 15% 15%,#662b85 0,transparent 38%),
+ radial-gradient(ellipse at 90% 80%,#78265c 0,transparent 35%),
+ linear-gradient(135deg,#10091d,#21102f,#10091e);
+ overflow-x:hidden;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;bottom:-40px;animation:floatUp linear infinite;opacity:.65}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+header{
+ height:68px;position:sticky;top:0;z-index:20;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 22px;background:#160d27df;backdrop-filter:blur(20px);
+ border-bottom:1px solid var(--line);
+}
+.logo{font:24px Pacifico;color:#ff9bd0}
+.music-btn,.menu-btn{
+ color:white;background:#ffffff12;border:1px solid var(--line);
+ padding:10px 15px;border-radius:30px;
+}
+.layout{display:flex;position:relative;z-index:1}
+nav{
+ width:230px;flex-shrink:0;height:calc(100vh - 68px);
+ position:sticky;top:68px;overflow-y:auto;padding:13px;
+ background:#ffffff08;border-right:1px solid var(--line);
+}
+nav button{
+ display:block;width:100%;text-align:left;padding:11px 13px;
+ border:1px solid transparent;border-radius:12px;
+ background:transparent;color:#eadcfb;margin:3px 0;
+ transition:transform .3s,background .3s,border .3s;
+}
+nav button:hover,nav button.active{
+ transform:translateX(5px);
+ background:linear-gradient(100deg,#ff69b444,#a879ff44);
+ border-color:#ff9bd066;color:white;
+}
+main{flex:1;min-width:0;max-width:1250px;margin:auto;padding:25px}
+.page{display:none}
+.page.active{display:block;animation:pageIn .65s cubic-bezier(.2,.8,.2,1)}
+@keyframes pageIn{
+ from{opacity:0;transform:translateY(25px) scale(.985);filter:blur(5px)}
+ to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+}
+.hero{text-align:center;padding:35px 10px}
+h1{font-size:clamp(34px,5vw,60px);line-height:1.2}
+.gradient{
+ background:linear-gradient(90deg,#ff8ac7,#c5a0ff,#fff0fa);
+ -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.script{font-family:Pacifico,cursive;color:#ff9bd0}
+.subtitle{color:#e7cbed;margin-top:12px}
+h2{font-size:25px;margin-bottom:12px}
+h3{margin-bottom:9px}
+p{line-height:1.8;color:#f0e2f5}
+.card{
+ background:var(--glass);border:1px solid var(--line);
+ border-radius:22px;padding:23px;margin-bottom:18px;
+ box-shadow:0 15px 45px #0003,inset 0 1px #ffffff12;
+ backdrop-filter:blur(16px);
+ transition:transform .35s,box-shadow .35s,border .35s;
+ animation:cardEnter .6s both;
+}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 55px #e45ca625;border-color:#ff9bd077}
+@keyframes cardEnter{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.btn{
+ border:0;border-radius:30px;padding:12px 20px;margin:6px 4px;
+ color:white;font-weight:700;
+ background:linear-gradient(110deg,#ff5eae,#956cff);
+ box-shadow:0 7px 24px #d45cbd55;
+ transition:transform .25s,filter .25s,box-shadow .25s;
+}
+.btn:hover{transform:translateY(-3px) scale(1.04);filter:brightness(1.14);box-shadow:0 10px 30px #e45ca766}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.secondary{background:#ffffff14;border:1px solid var(--line);box-shadow:none}
+.center{text-align:center}
+.result{
+ min-height:50px;padding:15px;margin:16px 0;
+ border-radius:15px;background:#ffffff0d;border:1px solid var(--line);
+ text-align:center;
+}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px}
+.big-emoji{font-size:70px;margin:15px;display:block}
+.reveal{animation:reveal .8s cubic-bezier(.2,1.5,.5,1)}
+@keyframes reveal{
+ 0%{opacity:0;transform:scale(.15) rotate(-20deg)}
+ 70%{opacity:1;transform:scale(1.15) rotate(5deg)}
+ 100%{transform:scale(1)}
+}
+.pulse{animation:pulse 1.5s infinite}
+@keyframes pulse{50%{transform:scale(1.07);filter:drop-shadow(0 0 12px #ff8dc9)}}
+input,textarea,select{
+ background:#ffffff12;color:white;border:1px solid #ffffff30;
+ border-radius:12px;padding:12px;width:100%;margin:7px 0;outline:none;
+}
+input::placeholder,textarea::placeholder{color:#d8c2e6}
+select option{background:#241638}
+textarea{min-height:100px;resize:vertical}
+.small{font-size:12px;color:#d9c4e8}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+
+/* Wheel */
+.wheel-wrap{position:relative;display:grid;place-items:center;padding:25px}
+.wheel{
+ width:min(300px,75vw);aspect-ratio:1;border-radius:50%;
+ border:9px solid #ffe0f3;
+ background:conic-gradient(#ff70b7 0 45deg,#a879ff 45deg 90deg,#ff9acb 90deg 135deg,#7954ce 135deg 180deg,#ff70b7 180deg 225deg,#a879ff 225deg 270deg,#ff9acb 270deg 315deg,#7954ce 315deg);
+ box-shadow:0 0 25px #ff8bc8,0 0 65px #a879ff77;
+ position:relative;transition:transform 5s cubic-bezier(.12,.75,.15,1);
+}
+.wheel span{position:absolute;left:50%;top:50%;font-size:23px;transform:rotate(var(--a)) translateY(-110px) rotate(calc(-1 * var(--a)))}
+.pointer{position:absolute;top:5px;z-index:2;font-size:34px}
+.wheel-center{position:absolute;inset:39%;border-radius:50%;background:white;color:#a44baf;display:grid;place-items:center;font-weight:800}
+
+/* Cake */
+.cake-scene{height:280px;display:grid;place-items:center;perspective:700px}
+.cake{position:relative;width:230px;height:180px;animation:cakeFloat 3s infinite ease-in-out}
+@keyframes cakeFloat{50%{transform:translateY(-9px) rotateX(4deg)}}
+.cake-top{position:absolute;top:48px;left:10px;width:210px;height:48px;border-radius:50%;background:linear-gradient(#fff0fa,#ff9ecf);border:4px solid #ffd4ed;z-index:4}
+.cake-layer{position:absolute;left:10px;top:70px;width:210px;height:90px;background:linear-gradient(90deg,#e75d9d,#ffb0d8,#d84992);border-radius:0 0 22px 22px;box-shadow:inset -13px 0 #a92e72,inset 8px 0 #ffcae8}
+.cake-layer:before{content:"";position:absolute;top:0;left:0;width:100%;height:25px;background:#fff0fa;border-radius:50%}
+.candle{position:absolute;z-index:5;top:3px;left:105px;width:13px;height:52px;border-radius:5px;background:repeating-linear-gradient(45deg,#fff 0 6px,#ff6eb7 6px 12px)}
+.flame{position:absolute;top:-24px;left:-3px;width:19px;height:26px;border-radius:60% 40% 55% 45%;background:linear-gradient(#fff,#ffe56b,#ff7a23);box-shadow:0 0 18px #ffb52e;animation:flicker .3s infinite alternate}
+@keyframes flicker{to{transform:scale(.8) rotate(8deg)}}
+.cake.off .flame{display:none}
+
+/* Fireworks */
+#fireCanvas{display:block;width:100%;height:340px;border-radius:18px;background:#100b25}
+
+/* Teddy */
+.teddy-stage{height:260px;display:grid;place-items:center;overflow:hidden}
+.teddy{font-size:110px;filter:drop-shadow(0 10px 10px #0005)}
+.teddy.complete{animation:teddyDance .8s ease-in-out 2}
+@keyframes teddyDance{25%{transform:rotate(-13deg) scale(1.15)}75%{transform:rotate(13deg) scale(1.15)}}
+
+/* Mascot */
+.mascot{position:fixed;right:12px;bottom:10px;z-index:25;display:flex;align-items:end;gap:7px;pointer-events:none}
+.anime{width:75px;height:98px;position:relative;animation:mascotFloat 3s infinite ease-in-out}
+@keyframes mascotFloat{50%{transform:translateY(-8px)}}
+.anime .head{position:absolute;top:7px;left:12px;width:54px;height:55px;background:#ffe0d1;border-radius:48%;border:3px solid #f6b6c8}
+.anime .hair{position:absolute;top:1px;left:8px;width:62px;height:35px;border-radius:50% 50% 20% 20%;background:#57345b;z-index:2}
+.anime .eye{position:absolute;top:31px;left:24px;z-index:3;color:#6d3a75;font-size:12px;letter-spacing:9px}
+.anime .blush{position:absolute;top:44px;left:18px;z-index:3;color:#fa8cae;font-size:11px}
+.anime .body{position:absolute;bottom:0;left:15px;width:49px;height:41px;border-radius:20px 20px 8px 8px;background:linear-gradient(120deg,#ff8dc4,#b18aff)}
+.speech{max-width:165px;padding:10px 12px;border-radius:16px 16px 3px 16px;background:white;color:#a34485;font-size:11px;font-weight:800;margin-bottom:50px;box-shadow:0 5px 20px #0004;animation:speechPop 2.8s infinite}
+@keyframes speechPop{50%{transform:translateY(-5px)}}
+footer{text-align:center;padding:30px;color:#cbb1db}
+@media(max-width:760px){
+ .layout{display:block}
+ nav{width:100%;height:auto;position:sticky;top:68px;display:flex;overflow-x:auto;padding:7px;background:#211333ee}
+ nav button{width:auto;white-space:nowrap;padding:9px 12px}
+ main{padding:14px}
+ .mascot{transform:scale(.78);transform-origin:bottom right}
+ .speech{max-width:125px}
+}
+</style>
+</head>
+<body>
+<div id="particles"></div>
+<header>
+ <div class="logo">For My Jaan 💗</div>
+ <button class="music-btn" id="musicButton" onclick="toggleMusic()">🎵 Play English Music</button>
+</header>
+<div class="layout">
+<nav id="nav"></nav>
+<main id="main">
+
+<section class="page active" id="home">
+ <div class="hero">
+  <div class="script">A little universe made just for you</div>
+  <h1 class="gradient">Happy Birthday<br>My Jaan! 💗</h1>
+  <p class="subtitle">You make every little moment magical.</p>
+  <span class="big-emoji pulse">🌸 💗 🌷</span>
+  <button class="btn" onclick="go('wheel')">Discover Your Surprise ✨</button>
+ </div>
+ <div class="grid">
+  <div class="card center"><span class="big-emoji">💗</span><h3>Made with Love</h3><p>A little world created for you.</p></div>
+  <div class="card center"><span class="big-emoji">🎀</span><h3>Your Special Day</h3><p>May your day be filled with happiness.</p></div>
+  <div class="card center"><span class="big-emoji">🌟</span><h3>One of a Kind</h3><p>You deserve all the beautiful things.</p></div>
+ </div>
+</section>
+
+<section class="page" id="music">
+ <div class="hero"><h1 class="gradient">Music Corner 🎵</h1><p class="subtitle">A little soundtrack for your special day.</p></div>
+ <div class="card center">
+  <span class="big-emoji pulse">🎧</span><h2>English Music Player</h2>
+  <p>Try the music button above. Your browser may require a tap before music can play.</p>
+  <button class="btn" onclick="toggleMusic()">Play / Pause Music</button>
+  <p class="small" id="musicStatus">Online stream. Internet connection required.</p>
+ </div>
+</section>
+
+<section class="page" id="letter">
+ <div class="hero"><h1 class="gradient">Birthday Letter 💌</h1></div>
+ <div class="card"><h2 class="script">To my Jaan, 💗</h2>
+ <p>Happy Birthday, my special person! I hope your day is full of smiles, laughter, beautiful surprises, and moments that make your heart happy.<br><br>
+ You deserve kindness, happiness, peaceful days, and dreams that come true. Never forget how special you are and how much joy you bring into the lives of people around you.<br><br>
+ May this new chapter bring you countless reasons to smile. Keep shining, keep dreaming, and keep being your wonderful self.<br><br>
+ I hope this little website makes your birthday a little more magical. Every part of it was made to bring you a smile.<br><br>
+ <span class="script">I love you, Bachu! Happy Birthday! 💗</span></p></div>
+</section>
+
+<section class="page" id="cake">
+ <div class="hero"><h1 class="gradient">Magic Birthday Cake 🎂</h1><p class="subtitle">Make a wish, birthday princess!</p></div>
+ <div class="card center">
+  <div class="cake-scene"><div class="cake" id="cake"><div class="candle"><div class="flame"></div></div><div class="cake-top"></div><div class="cake-layer"></div></div></div>
+  <h2 id="cakeMessage">A beautiful cake just for you! 💗</h2>
+  <button class="btn" onclick="blowCake()">Blow Out Candles 🌬️</button>
+  <button class="btn secondary" onclick="lightCake()">Light Again ✨</button>
+  <div class="result" id="cakeResult">Close your eyes and make a wish!</div>
+ </div>
+</section>
+
+<section class="page" id="candles">
+ <div class="hero"><h1 class="gradient">Wish Candles 🕯️</h1><p class="subtitle">Make three birthday wishes.</p></div>
+ <div class="card center"><div id="candlesDisplay" class="big-emoji">🕯️ 🕯️ 🕯️</div>
+ <button class="btn" onclick="wishCandles()">Make My Wishes ✨</button>
+ <div class="result" id="candleResult">Your wishes are waiting...</div></div>
+</section>
+
+<section class="page" id="balloons">
+ <div class="hero"><h1 class="gradient">Balloon Party 🎈</h1><p class="subtitle">Pop the balloons and celebrate!</p></div>
+ <div class="card center"><div class="grid" id="balloonArea"></div>
+ <button class="btn" onclick="newBalloons()">Reset Balloons</button>
+ <div class="result" id="balloonResult">Pop all the balloons!</div></div>
+</section>
+
+<section class="page" id="memory">
+ <div class="hero"><h1 class="gradient">Memory Match 🧠</h1><p class="subtitle">Find the matching pairs.</p></div>
+ <div class="card center"><div class="grid" id="memoryGrid"></div>
+ <button class="btn" onclick="newMemory()">Restart Game</button>
+ <div class="result" id="memoryResult">Find all the matching pairs!</div></div>
+</section>
+
+<section class="page" id="catch">
+ <div class="hero"><h1 class="gradient">Catch the Hearts 💗</h1></div>
+ <div class="card center"><h2 id="catchScore">Score: 0</h2>
+ <button class="btn" onclick="catchHeart()">Catch a Heart 💗</button>
+ <div class="result" id="catchResult">Catch as many hearts as you can!</div>
+ <button class="btn secondary" onclick="resetCatch()">Reset Score</button></div>
+</section>
+
+<section class="page" id="quiz">
+ <div class="hero"><h1 class="gradient">Birthday Quiz 💞</h1></div>
+ <div class="card center"><h2 id="quizQuestion">What makes a birthday special?</h2>
+ <div id="quizOptions"></div><div class="result" id="quizResult">Choose your answer!</div>
+ <button class="btn secondary" onclick="nextQuiz()">Next Question</button></div>
+</section>
+
+<section class="page" id="gallery">
+ <div class="hero"><h1 class="gradient">Photo Gallery 📸</h1><p class="subtitle">Add your favourite pictures.</p></div>
+ <div class="card center"><input type="file" id="galleryFiles" accept="image/*" multiple onchange="showPhotos(this,'galleryGrid')">
+ <div class="grid" id="galleryGrid"></div><p class="small">Photos preview in this browser session.</p></div>
+</section>
+
+<section class="page" id="videos">
+ <div class="hero"><h1 class="gradient">Special Videos 🎬</h1></div>
+ <div class="card center"><input type="file" accept="video/*" multiple onchange="showVideos(this)">
+ <div id="videoArea" class="grid"></div><p class="small">Choose videos from your device to preview them here.</p></div>
+</section>
+
+<section class="page" id="gifts">
+ <div class="hero"><h1 class="gradient">Gift Boxes 🎁</h1></div>
+ <div class="card center"><div class="grid">
+  <button class="btn" onclick="openGift(0)">🎁 Pink Gift</button>
+  <button class="btn" onclick="openGift(1)">🎀 Purple Gift</button>
+  <button class="btn" onclick="openGift(2)">💝 Golden Gift</button>
+ </div><div class="result" id="giftResult">Choose a gift box!</div><div class="big-emoji" id="giftReveal"></div></div>
+</section>
+
+<section class="page" id="jar">
+ <div class="hero"><h1 class="gradient">Memory Jar 🫙</h1></div>
+ <div class="card"><textarea id="jarInput" placeholder="Write a sweet memory..."></textarea>
+ <button class="btn" onclick="addJar()">Put Memory in Jar 💗</button><div id="jarList"></div></div>
+</section>
+
+<section class="page" id="wishes">
+ <div class="hero"><h1 class="gradient">Birthday Wishes 🌟</h1></div>
+ <div class="grid">
+  <div class="card">May your days be full of sunshine. ☀️</div>
+  <div class="card">May your dreams find their way to you. 🌈</div>
+  <div class="card">May happiness follow you everywhere. 💗</div>
+  <div class="card">May you always have reasons to smile. 🌸</div>
+ </div>
+</section>
+
+<section class="page" id="timeline">
+ <div class="hero"><h1 class="gradient">Our Little Timeline ⏳</h1></div>
+ <div class="card"><h3>🌷 A lovely beginning</h3><p>Every beautiful story begins with a moment.</p><hr>
+ <h3>💗 Beautiful memories</h3><p>Little moments can become the biggest treasures.</p><hr>
+ <h3>🌟 Today</h3><p>A special day celebrating you.</p><hr>
+ <h3>🎀 Tomorrow</h3><p>More dreams, more smiles, and more memories.</p></div>
+</section>
+
+<section class="page" id="card">
+ <div class="hero"><h1 class="gradient">Birthday Card Maker 💌</h1></div>
+ <div class="card center">
+ <input id="cardName" placeholder="Write her name">
+ <textarea id="cardText" placeholder="Write your birthday message..."></textarea>
+ <select id="cardTheme"><option value="💗">Pink hearts</option><option value="🌸">Flowers</option><option value="🎀">Cute ribbons</option><option value="✨">Sparkles</option></select>
+ <button class="btn" onclick="makeCard()">Create Card</button>
+ <div class="result" id="cardPreview">Your card will appear here.</div>
+ <button class="btn secondary" onclick="downloadCard()">Download Card Text</button></div>
+</section>
+
+<section class="page" id="buddy">
+ <div class="hero"><h1 class="gradient">Buddy Designer 🧸</h1></div>
+ <div class="card center"><div class="big-emoji reveal" id="buddyPreview">🧸</div>
+ <select id="buddyFace" onchange="updateBuddy()"><option>🧸</option><option>🐻</option><option>🐰</option><option>🐼</option></select>
+ <select id="buddyBow" onchange="updateBuddy()"><option>🎀</option><option>🌸</option><option>👑</option><option>💗</option></select>
+ <button class="btn" onclick="combineBuddy()">Combine Buddy & Ribbon</button>
+ <div class="result" id="buddyResult">Create your own little buddy!</div></div>
+</section>
+
+<section class="page" id="challenges">
+ <div class="hero"><h1 class="gradient">Cute Challenges 🏆</h1></div>
+ <div class="card center"><h2 id="challengeText">Send yourself three birthday smiles!</h2>
+ <button class="btn" onclick="newChallenge()">New Challenge</button><div class="result" id="challengeResult">You can do it!</div></div>
+</section>
+
+<section class="page" id="scrapbook">
+ <div class="hero"><h1 class="gradient">Digital Scrapbook 📔</h1></div>
+ <div class="card"><textarea id="scrapText" placeholder="Write a little scrapbook memory..."></textarea>
+ <button class="btn" onclick="addScrap()">Add to Scrapbook</button><div id="scrapList"></div></div>
+</section>
+
+<section class="page" id="riddle">
+ <div class="hero"><h1 class="gradient">Cute Riddles 🧩</h1></div>
+ <div class="card center"><h2 id="riddleText">What has a face and two hands but no arms?</h2>
+ <input id="riddleAnswer" placeholder="Your answer">
+ <button class="btn" onclick="checkRiddle()">Check Answer</button>
+ <button class="btn secondary" onclick="nextRiddle()">Next Riddle</button>
+ <div class="result" id="riddleResult"></div></div>
+</section>
+
+<section class="page" id="wheel">
+ <div class="hero"><h1 class="gradient">Magic Lucky Wheel 🎡</h1><p class="subtitle">Spin to reveal a surprise!</p></div>
+ <div class="card center"><div class="wheel-wrap"><div class="pointer">▼</div>
+ <div class="wheel" id="wheelGraphic">
+ <span style="--a:22.5deg">💗</span><span style="--a:67.5deg">🎁</span><span style="--a:112.5deg">🌸</span><span style="--a:157.5deg">🧸</span><span style="--a:202.5deg">💌</span><span style="--a:247.5deg">✨</span><span style="--a:292.5deg">🎂</span><span style="--a:337.5deg">💎</span><div class="wheel-center">SPIN</div>
+ </div></div>
+ <button class="btn" id="spinButton" onclick="spinWheel()">SPIN YOUR SURPRISE</button>
+ <div class="result" id="wheelResult">Your surprise is waiting...</div><div class="big-emoji" id="wheelGift"></div>
+ <button class="btn secondary" onclick="resetWheel()">Reset Wheel</button></div>
+</section>
+
+<section class="page" id="compliments">
+ <div class="hero"><h1 class="gradient">Compliment Machine 💗</h1></div>
+ <div class="card center"><div class="big-emoji">🌸</div>
+ <button class="btn" onclick="compliment()">Give Me a Compliment</button>
+ <div class="result" id="complimentResult">You are wonderful!</div></div>
+</section>
+
+<section class="page" id="notes">
+ <div class="hero"><h1 class="gradient">Secret Notes 💌</h1></div>
+ <div class="card"><input id="noteInput" placeholder="Write a secret sweet note">
+ <button class="btn" onclick="addNote()">Save Secret Note</button><div id="noteList"></div></div>
+</section>
+
+<section class="page" id="themes">
+ <div class="hero"><h1 class="gradient">Choose Your Theme 🎨</h1></div>
+ <div class="card center"><button class="btn" onclick="setTheme(0)">Pink Dream</button>
+ <button class="btn" onclick="setTheme(1)">Purple Galaxy</button>
+ <button class="btn" onclick="setTheme(2)">Rose Garden</button>
+ <button class="btn" onclick="setTheme(3)">Midnight Magic</button>
+ <div class="result" id="themeResult">Choose a beautiful theme.</div></div>
+</section>
+
+<section class="page" id="fireworks">
+ <div class="hero"><h1 class="gradient">Birthday Fireworks 🎆</h1></div>
+ <div class="card center"><canvas id="fireCanvas"></canvas>
+ <button class="btn" onclick="launchShow()">Launch Fireworks</button>
+ <button class="btn secondary" onclick="stopFireworks()">Stop Show</button>
+ <div class="result" id="fireMessage">A sky full of birthday wishes!</div></div>
+</section>
+
+<section class="page" id="scratch">
+ <div class="hero"><h1 class="gradient">Scratch Surprise ✨</h1></div>
+ <div class="card center"><h2>Reveal your secret message!</h2>
+ <button class="btn" id="scratchButton" onclick="scratchReveal()">Scratch to Reveal 💗</button>
+ <div class="result" id="scratchResult">🌸 🌸 🌸</div>
+ <button class="btn secondary" onclick="resetScratch()">Try Again</button></div>
+</section>
+
+<section class="page" id="treasure">
+ <div class="hero"><h1 class="gradient">Treasure Hunt 🔎</h1></div>
+ <div class="card center"><h2>Find the hidden treasure!</h2>
+ <div class="grid" id="treasureGrid"></div>
+ <div class="result" id="treasureResult">Choose a glass to find your treasure.</div>
+ <button class="btn secondary" onclick="newTreasure()">Reset Hunt</button></div>
+</section>
+
+<section class="page" id="mood">
+ <div class="hero"><h1 class="gradient">Mood Matcher 🌈</h1></div>
+ <div class="card center"><h2>How are you feeling today?</h2>
+ <div class="grid">
+ <button class="btn" onclick="setMood('happy','🌞')">Happy</button>
+ <button class="btn" onclick="setMood('dreamy','🌙')">Dreamy</button>
+ <button class="btn" onclick="setMood('playful','🎀')">Playful</button>
+ <button class="btn" onclick="setMood('calm','🌸')">Calm</button>
+ </div><div class="result" id="moodResult">Choose your mood.</div></div>
+</section>
+
+<section class="page" id="photo">
+ <div class="hero"><h1 class="gradient">Photo Booth 📷</h1></div>
+ <div class="card center"><input type="file" accept="image/*" capture="user" onchange="photoBooth(this)">
+ <div id="photoPreview" class="result">Choose a photo to preview it with a cute frame.</div>
+ </div>
+</section>
+
+<section class="page" id="surprise">
+ <div class="hero"><h1 class="gradient">The Surprise Room 🚪</h1><p class="subtitle">A mysterious door is waiting for you...</p></div>
+ <div class="card center">
+ <div class="big-emoji pulse" id="door">🚪</div>
+ <h2 id="doorTitle">Should we open the mystery door?</h2>
+ <button class="btn" id="doorButton" onclick="openDoor()">Open the Door 💗</button>
+ <div class="result" id="doorResult">Something special is waiting inside.</div>
+ <div class="big-emoji" id="doorGift"></div>
+ <button class="btn secondary" onclick="resetDoor()">Close Door</button>
+ </div>
+</section>
+
+<footer>Made with love and birthday wishes 💗</footer>
+</main>
+</div>
+
+<div class="mascot">
+ <div class="speech">I LOVE YOU BACHU! 💗<br>HAPPY BIRTHDAY! 🎂</div>
+ <div class="anime"><div class="hair"></div><div class="head"></div><div class="eye">● ●</div><div class="blush">●　●</div><div class="body"></div></div>
+</div>
+
+<audio id="bgMusic" preload="none" loop></audio>
+
+<script>
+/* 30 navigation tabs */
+const tabs=[
+ ['home','🏠 Home'],['music','🎵 Music'],['letter','💌 Birthday Letter'],
+ ['cake','🎂 Cake'],['candles','🕯️ Candles'],['balloons','🎈 Balloons'],
+ ['memory','🧠 Memory Game'],['catch','💗 Catch Hearts'],['quiz','💞 Birthday Quiz'],
+ ['gallery','📸 Photo Gallery'],['videos','🎬 Videos'],['gifts','🎁 Gift Boxes'],
+ ['jar','🫙 Memory Jar'],['wishes','🌟 Birthday Wishes'],['timeline','⏳ Timeline'],
+ ['card','💌 Card Maker'],['buddy','🧸 Buddy Designer'],['challenges','🏆 Challenges'],
+ ['scrapbook','📔 Scrapbook'],['riddle','🧩 Riddle'],['wheel','🎡 Lucky Wheel'],
+ ['compliments','💗 Compliments'],['notes','📝 Secret Notes'],['themes','🎨 Themes'],
+ ['fireworks','🎆 Fireworks'],['scratch','✨ Scratch Card'],['treasure','🔎 Treasure Hunt'],
+ ['mood','🌈 Mood Matcher'],['photo','📷 Photo Booth'],['surprise','🚪 Surprise Room']
+];
+const nav=document.getElementById('nav');
+tabs.forEach(([id,label],i)=>{
+ const b=document.createElement('button');
+ b.textContent=label;
+ if(i===0)b.classList.add('active');
+ b.onclick=()=>go(id);
+ nav.appendChild(b);
+});
+function go(id){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('nav button').forEach((b,i)=>b.classList.toggle('active',tabs[i][0]===id));
+ if(id==='fireworks')resizeFireCanvas();
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* Floating background */
+const particleBox=document.getElementById('particles');
+for(let i=0;i<38;i++){
+ const p=document.createElement('div');p.className='particle';
+ p.textContent=['💗','✨','🌸','♡','🎀'][i%5];
+ p.style.left=Math.random()*100+'%';
+ p.style.animationDuration=7+Math.random()*13+'s';
+ p.style.animationDelay=-Math.random()*15+'s';
+ p.style.fontSize=12+Math.random()*16+'px';
+ particleBox.appendChild(p);
+}
+
+/* Music: online English music stream */
+const music=document.getElementById('bgMusic');
+const musicButton=document.getElementById('musicButton');
+const musicStatus=document.getElementById('musicStatus');
+music.src='https://stream.zeno.fm/0r0xa792kwzuv';
+let musicStarted=false;
+async function startMusic(){
+ try{
+  await music.play();musicStarted=true;
+  musicButton.textContent='⏸ Pause Music';
+  if(musicStatus)musicStatus.textContent='Music is playing.';
+ }catch(e){
+  musicButton.textContent='🎵 Tap to Play Music';
+  if(musicStatus)musicStatus.textContent='Tap the music button to start the stream.';
+ }
+}
+function toggleMusic(){
+ if(music.paused)startMusic();
+ else{music.pause();musicButton.textContent='🎵 Play English Music';}
+}
+music.addEventListener('error',()=>{
+ musicButton.textContent='🎵 Stream unavailable';
+ if(musicStatus)musicStatus.textContent='The online stream may be unavailable.';
+});
+document.addEventListener('pointerdown',()=>{
+ if(!musicStarted&&music.paused)startMusic();
+},{once:true});
+
+/* Web Audio effects */
+let audioCtx;
+function soundContext(){
+ if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+ if(audioCtx.state==='suspended')audioCtx.resume();
+ return audioCtx;
+}
+function tone(freq,duration,type='sine',volume=.07){
+ const c=soundContext(),o=c.createOscillator(),g=c.createGain();
+ o.type=type;o.frequency.value=freq;
+ g.gain.setValueAtTime(volume,c.currentTime);
+ g.gain.exponentialRampToValueAtTime(.001,c.currentTime+duration);
+ o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+duration);
+}
+function sparkleSound(){[660,880,1100,1320].forEach((f,i)=>setTimeout(()=>tone(f,.2),i*90))}
+function confetti(){
+ for(let i=0;i<55;i++){
+  const e=document.createElement('div');e.textContent=['💗','✨','🌸','🎀','⭐'][i%5];
+  Object.assign(e.style,{position:'fixed',zIndex:40,left:Math.random()*100+'vw',top:'-25px',pointerEvents:'none',fontSize:16+Math.random()*15+'px'});
+  document.body.appendChild(e);
+  const a=e.animate([{transform:'translateY(0) rotate(0)',opacity:1},{transform:`translate(${(Math.random()-.5)*220}px,105vh) rotate(600deg)`,opacity:0}],{duration:2200+Math.random()*1500});
+  a.onfinish=()=>e.remove();
+ }
+}
+
+/* Cake and candles */
+function blowCake(){
+ document.getElementById('cake').classList.add('off');
+ document.getElementById('cakeMessage').textContent='Your wish is on its way! 💗';
+ document.getElementById('cakeResult').textContent='Happy Birthday! May your wishes come true! 🌟';
+ tone(500,.4);confetti();
+}
+function lightCake(){
+ document.getElementById('cake').classList.remove('off');
+ document.getElementById('cakeMessage').textContent='A beautiful cake just for you! 💗';
+ document.getElementById('cakeResult').textContent='Close your eyes and make a wish!';
+ sparkleSound();
+}
+function wishCandles(){
+ document.getElementById('candlesDisplay').textContent='✨ 💗 ✨';
+ document.getElementById('candleResult').textContent='Three wishes sent to the birthday stars! 🌟';
+ confetti();sparkleSound();
+}
+
+/* Balloons */
+function newBalloons(){
+ const area=document.getElementById('balloonArea');area.innerHTML='';
+ document.getElementById('balloonResult').textContent='Pop all the balloons!';
+ for(let i=0;i<9;i++){
+  const b=document.createElement('button');b.className='btn';
+  b.style.fontSize='32px';b.textContent='🎈';
+  b.onclick=()=>{
+   if(b.dataset.popped)return;b.dataset.popped='1';
+   b.textContent='✨';b.classList.add('reveal');
+   document.getElementById('balloonResult').textContent='Pop! Lovely! 💗';
+   tone(650,.15);if(area.querySelectorAll('[data-popped]').length===9)confetti();
+  };area.appendChild(b);
+ }
+}
+
+/* Memory game */
+let memoryCards=[],memoryOpen=[],memoryMatches=0,memoryLock=false;
+function newMemory(){
+ const icons=['💗','🎀','🌸','🧸','🎂','✨'];
+ memoryCards=[...icons,...icons].sort(()=>Math.random()-.5);
+ memoryOpen=[];memoryMatches=0;memoryLock=false;
+ const grid=document.getElementById('memoryGrid');grid.innerHTML='';
+ memoryCards.forEach((v,i)=>{
+  const b=document.createElement('button');b.className='btn';
+  b.style.fontSize='26px';b.textContent='❔';
+  b.onclick=()=>flipMemory(i,b);grid.appendChild(b);
+ });
+ document.getElementById('memoryResult').textContent='Find all six matching pairs!';
+}
+function flipMemory(i,b){
+ if(memoryLock||b.dataset.done||memoryOpen.some(x=>x.i===i))return;
+ b.textContent=memoryCards[i];memoryOpen.push({i,b});
+ if(memoryOpen.length===2){
+  memoryLock=true;
+  const [a,c]=memoryOpen;
+  if(memoryCards[a.i]===memoryCards[c.i]){
+   a.b.dataset.done=c.b.dataset.done='1';memoryMatches++;memoryOpen=[];memoryLock=false;
+   document.getElementById('memoryResult').textContent='Match found! 💗';
+   if(memoryMatches===6){document.getElementById('memoryResult').textContent='You found every pair! 🎉';confetti()}
+  }else setTimeout(()=>{a.b.textContent=c.b.textContent='❔';memoryOpen=[];memoryLock=false},750);
+ }
+}
+newMemory();
+
+/* Catch Hearts */
+let catchScore=0;
+function catchHeart(){
+ catchScore++;document.getElementById('catchScore').textContent='Score: '+catchScore;
+ document.getElementById('catchResult').textContent='💗 Lovely catch! Keep going!';
+ tone(750,.12);
+}
+function resetCatch(){catchScore=0;document.getElementById('catchScore').textContent='Score: 0';document.getElementById('catchResult').textContent='Catch as many hearts as you can!'}
+
+/* Quiz */
+const questions=[
+ ['What makes a birthday special?',['Love and happiness','Homework','Rainy Mondays'],0],
+ ['Which gift is the cutest?',['A teddy bear','An empty box','A broken pencil'],0],
+ ['What should every birthday have?',['A reason to smile','A long exam','No cake'],0]
+];
+let quizIndex=0;
+function renderQuiz(){
+ const q=questions[quizIndex];document.getElementById('quizQuestion').textContent=q[0];
+ const box=document.getElementById('quizOptions');box.innerHTML='';
+ q[1].forEach((v,i)=>{const b=document.createElement('button');b.className='btn';b.textContent=v;b.onclick=()=>{
+ document.getElementById('quizResult').textContent=i===q[2]?'Correct! You are amazing! 💗':'Nice try! Try another answer.';
+ if(i===q[2])sparkleSound();
+ };box.appendChild(b)});
+}
+function nextQuiz(){quizIndex=(quizIndex+1)%questions.length;renderQuiz()}
+renderQuiz();
+
+/* Gallery and video */
+function showPhotos(input,target){
+ const grid=document.getElementById(target);
+ [...input.files].forEach(file=>{
+  const url=URL.createObjectURL(file),img=document.createElement('img');
+  img.src=url;img.style.cssText='width:100%;border-radius:16px;object-fit:cover;max-height:260px';
+  grid.appendChild(img);
+ });
+}
+function showVideos(input){
+ const area=document.getElementById('videoArea');
+ [...input.files].forEach(file=>{
+  const v=document.createElement('video');v.src=URL.createObjectURL(file);
+  v.controls=true;v.style.width='100%';v.style.borderRadius='15px';area.appendChild(v);
+ });
+}
+
+/* Gift boxes */
+const giftData=[['A huge hug is coming your way!','🤗'],['A little teddy just for you!','🧸'],['A pocket full of wishes!','💝']];
+function openGift(i){
+ document.getElementById('giftResult').textContent=giftData[i][0];
+ const e=document.getElementById('giftReveal');e.textContent=giftData[i][1];
+ e.classList.remove('reveal');void e.offsetWidth;e.classList.add('reveal');confetti();
+}
+
+/* Memory jar and notes */
+function addJar(){
+ const v=document.getElementById('jarInput').value.trim();if(!v)return;
+ const e=document.createElement('div');e.className='result';e.textContent='💗 '+v;
+ document.getElementById('jarList').prepend(e);document.getElementById('jarInput').value='';
+}
+function addNote(){
+ const v=document.getElementById('noteInput').value.trim();if(!v)return;
+ const e=document.createElement('div');e.className='result';e.textContent='💌 '+v;
+ document.getElementById('noteList').prepend(e);document.getElementById('noteInput').value='';
+}
+
+/* Card maker */
+let madeCard='';
+function makeCard(){
+ const name=document.getElementById('cardName').value||'My Jaan';
+ const msg=document.getElementById('cardText').value||'Happy Birthday! You are special! 💗';
+ const emoji=document.getElementById('cardTheme').value;
+ madeCard=emoji+' Happy Birthday, '+name+'! '+emoji+'\n\n'+msg;
+ document.getElementById('cardPreview').textContent=madeCard;
+}
+function downloadCard(){
+ if(!madeCard)makeCard();
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([madeCard],{type:'text/plain'}));
+ a.download='birthday-card.txt';a.click();URL.revokeObjectURL(a.href);
+}
+
+/* Buddy designer */
+function updateBuddy(){
+ document.getElementById('buddyPreview').textContent=document.getElementById('buddyFace').value+' '+document.getElementById('buddyBow').value;
+}
+function combineBuddy(){
+ const e=document.getElementById('buddyPreview');e.classList.remove('reveal');void e.offsetWidth;e.classList.add('reveal');
+ document.getElementById('buddyResult').textContent='Your new teddy buddy is ready! 💗';
+ sparkleSound();confetti();
+}
+
+/* Challenges */
+const challengeList=['Send yourself three birthday smiles!','Make a wish for your future!','Find something beautiful around you!','Celebrate a little victory today!','Share a kind word with someone!'];
+function newChallenge(){
+ const v=challengeList[Math.floor(Math.random()*challengeList.length)];
+ document.getElementById('challengeText').textContent=v;
+ document.getElementById('challengeResult').textContent='Your next cute challenge! 🌸';
+}
+
+/* Scrapbook */
+function addScrap(){
+ const v=document.getElementById('scrapText').value.trim();if(!v)return;
+ const e=document.createElement('div');e.className='card';e.textContent='🌸 '+v;
+ document.getElementById('scrapList').prepend(e);document.getElementById('scrapText').value='';
+}
+
+/* Riddles */
+const riddles=[['What has a face and two hands but no arms?','clock'],['What has keys but cannot open locks?','piano'],['What gets wetter as it dries?','towel']];
+let riddleIndex=0;
+function nextRiddle(){riddleIndex=(riddleIndex+1)%riddles.length;document.getElementById('riddleText').textContent=riddles[riddleIndex][0];document.getElementById('riddleAnswer').value='';document.getElementById('riddleResult').textContent=''}
+function checkRiddle(){
+ const a=document.getElementById('riddleAnswer').value.trim().toLowerCase();
+ document.getElementById('riddleResult').textContent=a===riddles[riddleIndex][1]?'Correct! Brilliant! 🌟':'Not quite! Give it another try.';
+}
+
+/* Lucky wheel */
+const prizes=[['A thousand hugs!','🤗'],['A magical teddy!','🧸'],['A beautiful wish!','🌸'],['A special love letter!','💌'],['A birthday cake!','🎂'],['A box of happiness!','🎁'],['A sky full of stars!','✨'],['A diamond of love!','💎']];
+let spinning=false,rotation=0;
+function spinWheel(){
+ if(spinning)return;spinning=true;document.getElementById('spinButton').disabled=true;
+ document.getElementById('wheelResult').textContent='The magic is choosing your surprise...';
+ const index=Math.floor(Math.random()*8),slice=45;
+ rotation+=2160+(360-(index*slice+slice/2));
+ document.getElementById('wheelGraphic').style.transform=`rotate(${rotation}deg)`;
+ tone(450,.2);
+ setTimeout(()=>{
+  document.getElementById('wheelResult').textContent='YOUR SURPRISE: '+prizes[index][0];
+  const g=document.getElementById('wheelGift');g.textContent=prizes[index][1];g.classList.remove('reveal');void g.offsetWidth;g.classList.add('reveal');
+  confetti();sparkleSound();spinning=false;document.getElementById('spinButton').disabled=false;
+ },5100);
+}
+function resetWheel(){
+ if(spinning)return;rotation=0;const w=document.getElementById('wheelGraphic');
+ w.style.transition='none';w.style.transform='rotate(0deg)';setTimeout(()=>w.style.transition='',30);
+ document.getElementById('wheelResult').textContent='Your surprise is waiting...';document.getElementById('wheelGift').textContent='';
+}
+
+/* Compliments */
+const compliments=['Your smile can brighten a day! 💗','You are wonderfully unique! 🌸','You deserve beautiful things! ✨','You bring joy wherever you go! 🎀','Never stop being your lovely self! 🌷'];
+function compliment(){document.getElementById('complimentResult').textContent=compliments[Math.floor(Math.random()*compliments.length)];sparkleSound()}
+
+/* Themes */
+const themes=[
+ ['#662b85','#78265c','#10091d'],['#3b3486','#5a3588','#100b2b'],
+ ['#8d3b70','#b64e7b','#291027'],['#26305e','#58346f','#0a0b20']
+];
+function setTheme(i){
+ document.body.style.background=`radial-gradient(ellipse at 15% 15%,${themes[i][0]},transparent 38%),radial-gradient(ellipse at 90% 80%,${themes[i][1]},transparent 35%),linear-gradient(135deg,${themes[i][2]},#21102f,${themes[i][2]})`;
+ document.getElementById('themeResult').textContent='Your new theme is ready! 💗';
+}
+
+/* Firework sound */
+function fireworkSound(){
+ const c=soundContext(),length=c.sampleRate,buffer=c.createBuffer(1,length,c.sampleRate),data=buffer.getChannelData(0);
+ for(let i=0;i<length;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/length,2);
+ const src=c.createBufferSource(),filter=c.createBiquadFilter(),gain=c.createGain();
+ filter.type='lowpass';filter.frequency.value=1400;gain.gain.setValueAtTime(.45,c.currentTime);gain.gain.exponentialRampToValueAtTime(.001,c.currentTime+1);
+ src.buffer=buffer;src.connect(filter);filter.connect(gain);gain.connect(c.destination);src.start();tone(95,.5,'sine',.1);
+}
+const canvas=document.getElementById('fireCanvas'),ctx=canvas.getContext('2d');
+let fireParticles=[],fireTimer=null,fireActive=false;
+function resizeFireCanvas(){
+ const r=canvas.getBoundingClientRect(),d=Math.min(devicePixelRatio||1,2);
+ canvas.width=r.width*d;canvas.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);
+}
+window.addEventListener('resize',resizeFireCanvas);resizeFireCanvas();
+function explode(x,y){
+ const colors=['#ff70c4','#b58cff','#ffe58a','#8beaff','#ff9e8b'],color=colors[Math.floor(Math.random()*colors.length)];
+ for(let i=0;i<65;i++){
+  const a=Math.random()*Math.PI*2,s=1.3+Math.random()*4.3;
+  fireParticles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:1,decay:.009+Math.random()*.012,color,size:1.5+Math.random()*2.8});
+ }
+ fireworkSound();
+}
+function launchShow(){
+ soundContext();if(fireActive)return;fireActive=true;
+ document.getElementById('fireMessage').textContent='A beautiful sky just for you! 💗';
+ explode(canvas.clientWidth/2,canvas.clientHeight/3);
+ fireTimer=setInterval(()=>explode(40+Math.random()*(canvas.clientWidth-80),30+Math.random()*(canvas.clientHeight*.65)),750);
+ setTimeout(stopFireworks,12000);
+}
+function stopFireworks(){fireActive=false;clearInterval(fireTimer);fireTimer=null;document.getElementById('fireMessage').textContent='Every sparkle is a birthday wish.'}
+function animateFireworks(){
+ const w=canvas.clientWidth,h=canvas.clientHeight;
+ ctx.fillStyle='rgba(16,11,37,.22)';ctx.fillRect(0,0,w,h);
+ for(let i=fireParticles.length-1;i>=0;i--){
+  const p=fireParticles[i];p.x+=p.vx;p.y+=p.vy;p.vx*=.985;p.vy=p.vy*.985+.035;p.life-=p.decay;
+  ctx.globalAlpha=Math.max(0,p.life);ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill();
+  if(p.life<=0)fireParticles.splice(i,1);
+ }
+ ctx.globalAlpha=1;requestAnimationFrame(animateFireworks);
+}
+animateFireworks();
+
+/* Scratch card */
+let scratched=false;
+function scratchReveal(){
+ if(scratched)return;scratched=true;
+ document.getElementById('scratchResult').textContent='💗 You are someone truly special. Happy Birthday! 🎀';
+ document.getElementById('scratchResult').classList.add('reveal');confetti();
+}
+function resetScratch(){scratched=false;document.getElementById('scratchResult').textContent='🌸 🌸 🌸';document.getElementById('scratchResult').classList.remove('reveal')}
+
+/* Treasure hunt with animated glass reveals */
+let treasureIndex=0;
+function newTreasure(){
+ treasureIndex=Math.floor(Math.random()*6);
+ const grid=document.getElementById('treasureGrid');grid.innerHTML='';
+ for(let i=0;i<6;i++){
+  const b=document.createElement('button');b.className='btn';b.textContent='🥛';b.style.fontSize='35px';
+  b.onclick=()=>{
+   if(b.dataset.open)return;b.dataset.open='1';
+   if(i===treasureIndex){b.textContent='💎';b.classList.add('reveal');document.getElementById('treasureResult').textContent='You found the hidden treasure! 💗';confetti();sparkleSound()}
+   else{b.textContent='✨';document.getElementById('treasureResult').textContent='A little sparkle! Try another glass.'}
+  };grid.appendChild(b);
+ }
+ document.getElementById('treasureResult').textContent='Choose a glass to find your treasure.';
+}
+newTreasure();
+
+/* Mood */
+function setMood(m,e){document.getElementById('moodResult').textContent=e+' Your '+m+' mood deserves a little magic! 💗'}
+
+/* Photo booth */
+function photoBooth(input){
+ const f=input.files[0];if(!f)return;
+ const url=URL.createObjectURL(f);
+ document.getElementById('photoPreview').innerHTML='';
+ const img=document.createElement('img');img.src=url;
+ img.style.cssText='max-width:100%;max-height:350px;border:8px solid #ff9bd0;border-radius:20px;box-shadow:0 0 25px #ff8ac7';
+ document.getElementById('photoPreview').appendChild(img);
+}
+
+/* Mystery door */
+let doorOpen=false;
+function openDoor(){
+ if(doorOpen)return;doorOpen=true;
+ const d=document.getElementById('door');d.classList.remove('reveal');void d.offsetWidth;d.classList.add('reveal');
+ document.getElementById('door').textContent='🚪';
+ document.getElementById('doorTitle').textContent='The door is opening...';
+ document.getElementById('doorResult').textContent='A little suspense... something special is inside!';
+ setTimeout(()=>{
+  document.getElementById('door').textContent='✨';
+  document.getElementById('doorTitle').textContent='Surprise! Happy Birthday! 💗';
+  document.getElementById('doorResult').textContent='You found your special birthday gift!';
+  const g=document.getElementById('doorGift');g.textContent='🎁';g.classList.add('reveal');
+  confetti();sparkleSound();
+ },1600);
+}
+function resetDoor(){
+ doorOpen=false;document.getElementById('door').textContent='🚪';
+ document.getElementById('doorTitle').textContent='Should we open the mystery door?';
+ document.getElementById('doorResult').textContent='Something special is waiting inside.';
+ document.getElementById('doorGift').textContent='';
+}
+newBalloons();
+</script>
+</body>
+</html>
